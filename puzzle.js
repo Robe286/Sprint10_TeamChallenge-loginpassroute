@@ -6,15 +6,15 @@
 
 // -------------------------------------------------------------------------------------
 
-//Usado?: YES - Falta explicación
+//Usado?: YES
 const bodyParser = require('body-parser');
-//--- Explicación:
+//--- Explicación: Se requiere este módulo para convertir los datos enviados del formulario en un objeto usable.
 
 // -------------------------------------------------------------------------------------
 
-//Usado?: FALTA MARCAR Y COMENTARIO
+//Usado?: YES
 const session = require('express-session');
-//--- Explicación:
+//--- Explicación: requiriendo este módulo podremos almacenar datos de sesion en el servidor y no en el navegador del usuario.
 
 // -------------------------------------------------------------------------------------
 
@@ -26,19 +26,20 @@ const express = require('express');
 
 //Usado?: 
 const bodyParser = require('body-parser');
-//--- Explicación:
+//--- Explicación: Se requiere este módulo para convertir los datos enviados del formulario en un objeto usable.
 
 // -------------------------------------------------------------------------------------
 
 //Usado?: YES
 const session = require('express-session');
-//--- Explicación: 
+//--- Explicación: requiriendo este módulo podremos almacenar datos de sesion en el servidor y no en el navegador del usuario.
 
 // -------------------------------------------------------------------------------------
 
 //Usado?: Usado una vez ya
 const dotenv = require('dotenv');
-//--- Explicación:
+//--- Explicación: Se requiere el módulo dotenv para cargar la variable que contiene la palabra secreta.
+
 
 // -------------------------------------------------------------------------------------
 
@@ -56,7 +57,7 @@ const routes = require('./routes');
 
 //Usado?: Usado una vez ya
 dotenv.config();
-//--- Explicación:
+//--- Explicación: Se llama a dotenv.config() en el inicio de la aplicación y ya sería accesible.
 
 // -------------------------------------------------------------------------------------
 
@@ -80,7 +81,7 @@ const dotenv = require('dotenv');
 
 //Usado?: YES
 dotenv.config();
-//--- Explicación: Se llama a dotenv.config() en el incio de la aplicación y ya sería accesible.
+//--- Explicación: Se llama a dotenv.config() en el inicio de la aplicación y ya sería accesible.
 
 // -------------------------------------------------------------------------------------
 
@@ -92,7 +93,7 @@ middlewares.setupApp(app);
 
 //Usado?: YES -  Falta explicación
 routes.setup(app);
-//--- Explicación: 
+//--- Explicación: Inicializa setup(app) en routes
 
 // -------------------------------------------------------------------------------------
 
@@ -107,13 +108,13 @@ const validarPalabraMiddleware = (req, res, next) => {
     res.redirect('/?error=1');
   }
 };
-//--- Explicación: 
+//--- Explicación: Middleware que valida si la palabra recogida en el imput es = a la palabra secreta, si no es así redirecciona con un mensaje de error.
 
 
 // -------------------------------------------------------------------------------------
 
 
-//Usado?: YES - Falta explicación
+//Usado?: YES
 const setup = (app) => {
   app.get('/', (req, res) => {
     const mensajeError = req.query.error
@@ -124,13 +125,13 @@ const setup = (app) => {
     }
   //Aquí va código dentro
 })}
-//--- Explicación: 
+//--- Explicación: Cuando se inicie la aplicación si la palabra es correcta redireccióna a /profile
 
 
 // -------------------------------------------------------------------------------------
 
 
-//Usado?: YES - Falta explicación
+//Usado?: YES
 res.send(`
   <html>
     <body>
@@ -144,12 +145,12 @@ res.send(`
     </body>
   </html>
 `);
-//--- Explicación: 
+//--- Explicación: respuesta para mostrar el formulario al iniciar la aplicación
 
 
 // -------------------------------------------------------------------------------------
 
-//Usado?: YES - Falta explicación
+//Usado?: YES
 const setupAPP = (app) => {
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(session({
@@ -158,12 +159,12 @@ const setupAPP = (app) => {
     saveUninitialized: true,
   }));
 };
-//--- Explicación: 
+//--- Explicación: que guarde una nueva sesión si ha sido modificada.
 
 
 // -------------------------------------------------------------------------------------
 
-//Usado?: YES - Falta explicación
+//Usado?: YES
 app.post('/profile', middlewares.validarPalabraMiddleware, (req, res) => {
   res.send(`
     <h1>Ruta del Perfil</h1>
@@ -172,25 +173,25 @@ app.post('/profile', middlewares.validarPalabraMiddleware, (req, res) => {
     </form>
   `);
 });
-//--- Explicación: 
+//--- Explicación: Ruta para procesar la sesión
 
 // -------------------------------------------------------------------------------------
 
-//Usado?: YES - Falta explicación
+//Usado?: YES 
 app.use(bodyParser.urlencoded({ extended: true }));
 
-//--- Explicación: 
+//--- Explicación: Configura el middleware bodyParse para que pueda leer los datos enviados mediante POST desde el formulario HTML
 
 // -------------------------------------------------------------------------------------
 
-//Usado?: YES - Falta explicación
+//Usado?: YES
 app.use(session({
   secret: process.env.PALABRA_SECRETA || 'secretoSuperSecreto',
   resave: false,
   saveUninitialized: true,
 }));
 
-//--- Explicación: 
+//--- Explicación: No tengo claro lo que hace
 
 // -------------------------------------------------------------------------------------
 
@@ -210,7 +211,7 @@ const verificarSesionMiddleware = (req, res, next) => {
     res.redirect('/?error=2');
   }
 };
-//--- Explicación: 
+//--- Explicación: Simula la verificación de que ha sido exitoso el inicio de sesión, si no muestra un mensaje de error
 
 // -------------------------------------------------------------------------------------
 
@@ -224,12 +225,12 @@ app.get('/profile', middlewares.verificarSesionMiddleware, (req, res) => {
     </form>
   `);
 });
-//--- Explicación: 
+//--- Explicación: se solicita información a /profile, cuando pase el middleware se visualiza el contenido de la ruta del perfil.
 
 // -------------------------------------------------------------------------------------
 
 
-//Usado?: - YES - ESTE POST ES COMO UN MIDDLEWARE - revisar posición
+//Usado?: - YES - ESTE POST ES COMO UN MIDDLEWARE
 app.post('/logout', (req, res) => {
   req.session.destroy((err) => {
     if (err) {
@@ -238,25 +239,25 @@ app.post('/logout', (req, res) => {
     res.redirect('/');
   });
 });
-//--- Explicación: 
+//--- Explicación: Cuando se pulsa log Out redirecciona a esta ruta y que borra los datos almacenados en la sesión.
 
 // -------------------------------------------------------------------------------------
 
-//Usado?: YES - Falta explicación - ESTE VA A IR EN ROUTES
+//Usado?: YES - ESTE VA A IR EN ROUTES
 module.exports = {
   setup,
 };
-//--- Explicación:
+//--- Explicación: se exporta setup para poder ser usado en otros módulos
 
 // -------------------------------------------------------------------------------------
 
-//Usado?: YES - Falta explicación - ESTE VA A IR EN MIDDLEWARES
+//Usado?: YES - ESTE VA A IR EN MIDDLEWARES
 module.exports = { 
   validarPalabraMiddleware,
   verificarSesionMiddleware,
   setupAPP,
 };
-//--- Explicación:
+//--- Explicación: Se exportan los middlewares para poder usarlos en las rutas y demás módulos en los que sean necesarios.
 
 // -------------------------------------------------------------------------------------
 

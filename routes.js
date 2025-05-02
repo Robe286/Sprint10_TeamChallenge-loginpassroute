@@ -24,6 +24,8 @@ const setup = (app) => {
         `);
     })
 
+    app.use(bodyParser.urlencoded({ extended: true }));
+
     app.get('/profile', middlewares.verificarSesionMiddleware, (req, res) => {
       res.send(`
         <h1>Ruta del Perfil (Sesión activa)</h1>
