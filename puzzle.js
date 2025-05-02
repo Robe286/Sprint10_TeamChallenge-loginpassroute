@@ -1,26 +1,26 @@
 // Snippets de código para poder componer el programa
 
-//Usado?: 
+//Usado?: YES
   const middlewares = require('./middlewares');
-//--- Explicación: 
+//--- Explicación: Guardandolo en una variable, requerimos lo que hay dentro del archivo 'middlewares' para poder usarlo
 
 // -------------------------------------------------------------------------------------
 
-//Usado?: 
+//Usado?: YES - Falta explicación
 const bodyParser = require('body-parser');
 //--- Explicación:
 
 // -------------------------------------------------------------------------------------
 
-//Usado?: 
+//Usado?: FALTA MARCAR Y COMENTARIO
 const session = require('express-session');
 //--- Explicación:
 
 // -------------------------------------------------------------------------------------
 
-//Usado?: 
+//Usado?: YES
 const express = require('express');
-//--- Explicación:
+//--- Explicación: Se requiere el módulo express para crear el servidor en node express
 
 // -------------------------------------------------------------------------------------
 
@@ -30,73 +30,73 @@ const bodyParser = require('body-parser');
 
 // -------------------------------------------------------------------------------------
 
-//Usado?: 
+//Usado?: YES
 const session = require('express-session');
-//--- Explicación:
-
-// -------------------------------------------------------------------------------------
-
-//Usado?: 
-const dotenv = require('dotenv');
-//--- Explicación:
-
-// -------------------------------------------------------------------------------------
-
-//Usado?: 
-const middlewares = require('./middlewares');
-//--- Explicación:
-
-// -------------------------------------------------------------------------------------
-
-//Usado?: 
-const routes = require('./routes');
-//--- Explicación:
-
-// -------------------------------------------------------------------------------------
-
-//Usado?: 
-dotenv.config();
-//--- Explicación:
-
-// -------------------------------------------------------------------------------------
-
-//Usado?: 
-const app = express();
-//--- Explicación:
-
-// -------------------------------------------------------------------------------------
-
-//Usado?: 
-const PORT = 4000;
-//--- Explicación:
-
-// -------------------------------------------------------------------------------------
-
-//Usado?: 
-const dotenv = require('dotenv');
-//--- Explicación:
-
-// -------------------------------------------------------------------------------------
-
-//Usado?:
-dotenv.config();
-//--- Explicación:
-
-// -------------------------------------------------------------------------------------
-
-//Usado?:
-middlewares.setupApp(app);
 //--- Explicación: 
 
 // -------------------------------------------------------------------------------------
 
-//Usado?:
+//Usado?: Usado una vez ya
+const dotenv = require('dotenv');
+//--- Explicación:
+
+// -------------------------------------------------------------------------------------
+
+//Usado?: YES
+const middlewares = require('./middlewares');
+//--- Explicación: requerimos todo lo que hay en el archivo middlewares para usarlo en routes.
+
+// -------------------------------------------------------------------------------------
+
+//Usado?: YES
+const routes = require('./routes');
+//--- Explicación: Guardandolo en una variable, requerimos lo que hay dentro del archivo routes para traer las rutas
+
+// -------------------------------------------------------------------------------------
+
+//Usado?: Usado una vez ya
+dotenv.config();
+//--- Explicación:
+
+// -------------------------------------------------------------------------------------
+
+//Usado?: YES
+const app = express();
+//--- Explicación: Creamos una constante de nombre app para inicializar el servidor con express
+
+// -------------------------------------------------------------------------------------
+
+//Usado?: YES
+const PORT = 4000;
+//--- Explicación: Creamos una variable de nombre PORT donde guardaremos el puerto que usará el servidor para escuchar
+
+// -------------------------------------------------------------------------------------
+
+//Usado?: YES
+const dotenv = require('dotenv');
+//--- Explicación: Se requiere el módulo dotenv para cargar la variable que contiene la palabra secreta.
+
+// -------------------------------------------------------------------------------------
+
+//Usado?: YES
+dotenv.config();
+//--- Explicación: Se llama a dotenv.config() en el incio de la aplicación y ya sería accesible.
+
+// -------------------------------------------------------------------------------------
+
+//Usado?: YES
+middlewares.setupApp(app);
+//--- Explicación: En middelwares nicializamos setupAPP(app) para...
+
+// -------------------------------------------------------------------------------------
+
+//Usado?: YES -  Falta explicación
 routes.setup(app);
 //--- Explicación: 
 
 // -------------------------------------------------------------------------------------
 
-//Usado?:
+//Usado?: YES
 const validarPalabraMiddleware = (req, res, next) => {
   const palabraCorrecta = process.env.PALABRA_SECRETA || '';
 
@@ -113,7 +113,7 @@ const validarPalabraMiddleware = (req, res, next) => {
 // -------------------------------------------------------------------------------------
 
 
-//Usado?:
+//Usado?: YES - Falta explicación
 const setup = (app) => {
   app.get('/', (req, res) => {
     const mensajeError = req.query.error
@@ -130,7 +130,7 @@ const setup = (app) => {
 // -------------------------------------------------------------------------------------
 
 
-//Usado?:
+//Usado?: YES - Falta explicación
 res.send(`
   <html>
     <body>
@@ -149,7 +149,7 @@ res.send(`
 
 // -------------------------------------------------------------------------------------
 
-
+//Usado?: YES - Falta explicación
 const setupAPP = (app) => {
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(session({
@@ -158,8 +158,12 @@ const setupAPP = (app) => {
     saveUninitialized: true,
   }));
 };
+//--- Explicación: 
 
-//Usado?:
+
+// -------------------------------------------------------------------------------------
+
+//Usado?: YES - Falta explicación
 app.post('/profile', middlewares.validarPalabraMiddleware, (req, res) => {
   res.send(`
     <h1>Ruta del Perfil</h1>
@@ -172,14 +176,14 @@ app.post('/profile', middlewares.validarPalabraMiddleware, (req, res) => {
 
 // -------------------------------------------------------------------------------------
 
-//Usado?:
+//Usado?: YES - Falta explicación
 app.use(bodyParser.urlencoded({ extended: true }));
 
 //--- Explicación: 
 
 // -------------------------------------------------------------------------------------
 
-//Usado?:
+//Usado?: YES - Falta explicación
 app.use(session({
   secret: process.env.PALABRA_SECRETA || 'secretoSuperSecreto',
   resave: false,
@@ -190,15 +194,15 @@ app.use(session({
 
 // -------------------------------------------------------------------------------------
 
-//Usado?:
+//Usado?: YES
 app.listen(PORT, () => {
   console.log(`Servidor en ejecución en http://localhost:${PORT}`);
 });
-//--- Explicación: 
+//--- Explicación: Esta función inicia el servidor y hace que escuche las solicitudes entrantes en el puerto especificado PORT. Este console.log nos da información sobre su correcta escucha, visible en la terminal.
 
 // -------------------------------------------------------------------------------------
 
-//Usado?:
+//Usado?: YES
 const verificarSesionMiddleware = (req, res, next) => {
   if (req.session.palabraSecreta) {
     next();
@@ -211,7 +215,7 @@ const verificarSesionMiddleware = (req, res, next) => {
 // -------------------------------------------------------------------------------------
 
 
-//Usado?:
+//Usado?: YES - Falta explicación
 app.get('/profile', middlewares.verificarSesionMiddleware, (req, res) => {
   res.send(`
     <h1>Ruta del Perfil (Sesión activa)</h1>
@@ -225,7 +229,7 @@ app.get('/profile', middlewares.verificarSesionMiddleware, (req, res) => {
 // -------------------------------------------------------------------------------------
 
 
-//Usado?:
+//Usado?: - YES - ESTE POST ES COMO UN MIDDLEWARE - revisar posición
 app.post('/logout', (req, res) => {
   req.session.destroy((err) => {
     if (err) {
@@ -238,7 +242,7 @@ app.post('/logout', (req, res) => {
 
 // -------------------------------------------------------------------------------------
 
-//Usado?:
+//Usado?: YES - Falta explicación - ESTE VA A IR EN ROUTES
 module.exports = {
   setup,
 };
@@ -246,8 +250,8 @@ module.exports = {
 
 // -------------------------------------------------------------------------------------
 
-//Usado?:
-module.exports = {
+//Usado?: YES - Falta explicación - ESTE VA A IR EN MIDDLEWARES
+module.exports = { 
   validarPalabraMiddleware,
   verificarSesionMiddleware,
   setupAPP,
